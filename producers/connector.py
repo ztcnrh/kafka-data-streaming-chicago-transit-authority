@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 KAFKA_CONNECT_URL = "http://localhost:8083/connectors"
 # KAFKA_CONNECT_URL = "http://kafka-connect:8083/connectors"
-CONNECTOR_NAME = "stations-jdbc"
+CONNECTOR_NAME = "stations-jdbc-connect"
 
 def configure_connector():
     """Starts and configures the Kafka Connect connector"""
