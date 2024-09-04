@@ -23,7 +23,7 @@ class Station(Producer):
 
     def __init__(self, station_id, name, color, direction_a=None, direction_b=None):
         self.name = name
-        station_name = (
+        self.station_name = (
             self.name.lower()
             .replace("/", "_and_")
             .replace(" ", "_")
@@ -37,7 +37,7 @@ class Station(Producer):
         # replicas
         #
         #
-        topic_name = f"cta.arrivals_{station_name}" # TODO (done): Come up with a better topic name
+        topic_name = f"cta.arrival_events" # TODO (done): Come up with a better topic name
         super().__init__(
             topic_name,
             key_schema=Station.key_schema,

@@ -10,7 +10,8 @@ import topic_check
 logger = logging.getLogger(__name__)
 
 
-KSQL_URL = "http://localhost:8088"
+KSQL_URL = "http://localhost:8088" # (Local host)
+# KSQL_URL = "http://ksql:8088" # (Docker)
 
 #
 # TODO: Complete the following KSQL statements.
@@ -23,14 +24,20 @@ KSQL_URL = "http://localhost:8088"
 
 KSQL_STATEMENT = """
 CREATE TABLE turnstile (
-    ???
+    station_id INT,
+    station_name STRING,
+    line STRING
 ) WITH (
-    ???
+    KAFKA_TOPIC='cta.turnstile_events',
+    VALUE_FORMAT='AVRO',
+    KEY='timestamp'
 );
 
 CREATE TABLE turnstile_summary
-WITH (???) AS
-    ???
+WITH (VALUE_FORMAT='JSON') AS
+    SELECT station_id, COUNT(*) AS count
+    FROM turnstile
+    GROUP BY station_id;
 """
 
 

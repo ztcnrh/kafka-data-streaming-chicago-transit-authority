@@ -21,7 +21,7 @@ class Turnstile(Producer):
 
     def __init__(self, station):
         """Create the Turnstile"""
-        station_name = (
+        self.station_name = (
             station.name.lower()
             .replace("/", "_and_")
             .replace(" ", "_")
@@ -36,7 +36,7 @@ class Turnstile(Producer):
         #
         #
         super().__init__(
-            f"cta.turnstile_events_{station_name}", # TODO (done): Come up with a better topic name
+            f"cta.turnstile_events", # TODO (done): Come up with a better topic name
             key_schema=Turnstile.key_schema,
             value_schema=Turnstile.value_schema,
             num_partitions=1, # Default value, change if needed
