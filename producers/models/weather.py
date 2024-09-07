@@ -22,7 +22,6 @@ class Weather(Producer):
     )
 
     rest_proxy_url = "http://localhost:8082"
-    # rest_proxy_url = "http://rest-proxy:8082"
 
     key_schema = None
     value_schema = None

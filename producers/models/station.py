@@ -23,7 +23,7 @@ class Station(Producer):
 
     def __init__(self, station_id, name, color, direction_a=None, direction_b=None):
         self.name = name
-        station_name = (
+        self.station_name = (
             self.name.lower()
             .replace("/", "_and_")
             .replace(" ", "_")
@@ -37,7 +37,7 @@ class Station(Producer):
         # replicas
         #
         #
-        topic_name = f"cta.arrivals_{station_name}" # TODO (done): Come up with a better topic name
+        topic_name = f"cta.arrival_events" # TODO (done): Come up with a better topic name
         super().__init__(
             topic_name,
             key_schema=Station.key_schema,
@@ -62,6 +62,26 @@ class Station(Producer):
         # TODO (done): Complete this function by producing an arrival message to Kafka
         #
         #
+
+        line_color = None
+        train_status = None
+        
+        # Map the string representation of color to the actual color name string
+        if self.color.name == "blue":
+            line_color = "blue"
+        if self.color.name == "red":
+            line_color = "red"
+        if self.color.name == "green":
+            line_color = "green"
+
+        # Map the string representation of train status to the actual train status name string
+        if train.status.name == "out_of_service":
+            train_status = "out_of_service"
+        if train.status.name == "in_service":
+            train_status = "in_service"
+        if train.status.name == "broken_down":
+            train_status = "broken_down"
+        
         self.producer.produce(
            topic=self.topic_name,
            key={"timestamp": self.time_millis()},
@@ -69,8 +89,8 @@ class Station(Producer):
                "station_id": self.station_id,
                "train_id": train.train_id,
                "direction": direction,
-               "line": self.color,
-               "train_status": train.status,
+               "line": line_color,
+               "train_status": train_status,
                "prev_station_id": prev_station_id,
                "prev_direction": prev_direction,
            },
