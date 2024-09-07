@@ -31,19 +31,11 @@ class Producer:
         self.num_partitions = num_partitions
         self.num_replicas = num_replicas
 
-        #
-        #
         # TODO (done): Configure the broker properties below. Make sure to reference the project README
         # and use the Host URL for Kafka and Schema Registry!
-        #
-        #
         self.broker_properties = {
-            # TODO (done)
             "bootstrap.servers": "PLAINTEXT://localhost:9092", # Kafka broker address
-            # TODO (done)
             "schema.registry.url": "http://localhost:8081", # Schema Registry URL
-            # "schema.registry.url": "http://schema-registry:8081", # Schema Registry URL
-            # TODO
         }
 
         # If the topic does not already exist, try to create it
@@ -60,12 +52,9 @@ class Producer:
 
     def create_topic(self):
         """Creates the producer topic if it does not already exist"""
-        #
-        #
+
         # TODO (done): Write code that creates the topic for this producer if it does not already exist on
         # the Kafka Broker.
-        #
-        #
         client = AdminClient({"bootstrap.servers": self.broker_properties["bootstrap.servers"]})
         
         topic_metadata = client.list_topics(timeout=5)
@@ -80,8 +69,6 @@ class Producer:
         else:
             logger.info(f"Topic {self.topic_name} already exists.")
 
-        # logger.info("topic creation kafka integration incomplete - skipping")
-
     def close(self):
         """Prepares the producer for exit by cleaning up the producer"""
         #
@@ -92,8 +79,6 @@ class Producer:
         if self.producer is not None:
             self.producer.flush()
             logger.info("Producer flushed and closed successfully.")
-
-        # logger.info("producer close incomplete - skipping")
 
     def time_millis(self):
         """Use this function to get the key for Kafka Events"""

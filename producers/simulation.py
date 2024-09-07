@@ -80,4 +80,5 @@ class TimeSimulation:
 
 
 if __name__ == "__main__":
-    TimeSimulation().run()
+    custom_time_step = datetime.timedelta(minutes=1)
+    TimeSimulation(time_step=custom_time_step).run()

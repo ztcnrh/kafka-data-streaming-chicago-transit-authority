@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 KAFKA_CONNECT_URL = "http://localhost:8083/connectors"
-# KAFKA_CONNECT_URL = "http://kafka-connect:8083/connectors"
 CONNECTOR_NAME = "stations-jdbc-connect"
 
 def configure_connector():
@@ -23,10 +22,7 @@ def configure_connector():
         return
 
     # TODO (done): Complete the Kafka Connect Config below.
-    # Directions: Use the JDBC Source Connector to connect to Postgres. Load the `stations` table
-    # using incrementing mode, with `stop_id` as the incrementing column name.
-    # Make sure to think about what an appropriate topic prefix would be, and how frequently Kafka
-    # Connect should run this connector (hint: not very often!)
+    # Use the JDBC Source Connector to connect to Postgres. Load the `stations` table using incrementing mode, with `stop_id` as the incrementing column name.
 
     # Define the connector configuration
     connector_config = {
@@ -39,7 +35,6 @@ def configure_connector():
             "value.converter.schemas.enable": "false",
             "batch.max.rows": "500",  # Maximum number of rows to include in a single batch
             "connection.url": "jdbc:postgresql://postgres:5432/cta",  # Connection URL for the Postgres database (Docker)
-            # "connection.url": "jdbc:postgresql://localhost:5432/cta",  # Connection URL for the Postgres database (Local host)
             "connection.user": "cta_admin",  # Postgres username
             "connection.password": "chicago",  # Postgres password
             "table.whitelist": "stations",  # Only capture data from the `stations` table
