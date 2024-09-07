@@ -32,12 +32,9 @@ class Station(Producer):
         )
 
         #
+        # TODO (done): Complete the below by deciding on a topic name, number of partitions, and number of replicas
         #
-        # TODO (done): Complete the below by deciding on a topic name, number of partitions, and number of
-        # replicas
-        #
-        #
-        topic_name = f"cta.arrival_events" # TODO (done): Come up with a better topic name
+        topic_name = f"cta.arrival_events" # TODO (done): come up with an appropriate topic name
         super().__init__(
             topic_name,
             key_schema=Station.key_schema,
@@ -57,10 +54,9 @@ class Station(Producer):
 
     def run(self, train, direction, prev_station_id, prev_direction):
         """Simulates train arrivals at this station"""
-        #
+
         #
         # TODO (done): Complete this function by producing an arrival message to Kafka
-        #
         #
 
         line_color = None

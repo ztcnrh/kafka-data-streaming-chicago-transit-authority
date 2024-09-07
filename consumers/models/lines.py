@@ -19,10 +19,12 @@ class Lines:
 
     def process_message(self, message):
         """Processes a station message"""
-        # if "org.chicago.cta.station" in message.topic():
+
+        #
+        # TODO (done): Use the appropriate topic name patterns for the conditionals below
+        #
         if "cta." in message.topic():
             value = message.value()
-            # if message.topic() == "org.chicago.cta.stations.table.v1":
             if message.topic() == "cta.stations.transformed":
                 value = json.loads(value)
             if value["line"] == "green":

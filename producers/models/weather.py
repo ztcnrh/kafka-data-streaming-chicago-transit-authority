@@ -31,13 +31,10 @@ class Weather(Producer):
 
     def __init__(self, month):
         #
-        #
-        # TODO: Complete the below by deciding on a topic name, number of partitions, and number of
-        # replicas
-        #
+        # TODO (done): Complete the below by deciding on a topic name, number of partitions, and number of replicas
         #
         super().__init__(
-            "cta.weather_events", # TODO: Come up with a better topic name
+            "cta.weather_events", # TODO (done): come up with an appropriate topic name
             key_schema=Weather.key_schema,
             value_schema=Weather.value_schema,
             num_partitions=1, # Default value, change if needed
@@ -75,8 +72,10 @@ class Weather(Producer):
     def run(self, month):
         self._set_weather(month)
 
+        #
         # TODO (done): Complete the function by posting a weather event to REST Proxy. Make sure to
         # specify the Avro schemas and verify that you are using the correct Content-Type header.
+        #
 
         # Define the REST Proxy URL for the Kafka topic
         url = f"{Weather.rest_proxy_url}/topics/{self.topic_name}"

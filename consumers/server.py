@@ -62,21 +62,22 @@ def run_server():
 
     # Build kafka consumers
     consumers = [
+
+        #
+        # TODO (done): Configure KafkConsumer with the matching topic names
+        #
         KafkaConsumer(
-            # "org.chicago.cta.weather.v1",
             "cta.weather_events",
             weather_model.process_message,
             offset_earliest=True,
         ),
         KafkaConsumer(
-            # "org.chicago.cta.stations.table.v1",
             "cta.stations.transformed",
             lines.process_message,
             offset_earliest=True,
             is_avro=False,
         ),
         KafkaConsumer(
-            # "^org.chicago.cta.station.arrivals.",
             "cta.arrival_events",
             lines.process_message,
             offset_earliest=True,

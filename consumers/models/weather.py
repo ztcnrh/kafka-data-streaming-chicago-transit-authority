@@ -15,7 +15,10 @@ class Weather:
 
     def process_message(self, message):
         """Handles incoming weather data"""
+
+        #
         # TODO (done): Process incoming weather messages. Set the temperature and status.
+        #
         try:
             value = message.value()
             self.temperature = value.get("temperature", self.temperature)
