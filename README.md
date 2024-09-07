@@ -1,3 +1,15 @@
+The TL;DR:
+* In this project, various Kafka services including Kafka Connect, Schema Registry, KSQL, and various UIs (e.g. Kafka Topics UI, Kafka Connect UI) are configured in `docker-compose.yaml`.
+* Data is read from local `.csv` files and is produced by `simulation.py` in 3 ways:
+   * Various models that inherit the `Producer` class, which implements an `AvroProducer`, produce data to the Kafka broker
+   * `connector.py` implements a POST API call to the Kafka Connect endpoint to configure a `JdbcSourceConnector` that produces data to a topic from a Postgres table that has data loaded from the `cta_stations.csv` file
+   * Weather data is produced to a topic by periodically making POST calls to the Kafka REST Proxy endpoint
+* A Faust app is used to transform data from a topic and produces messages to a new topic
+* A POST request to the KSQL endpoint is used to aggregate data from a topic and produces aggregation results to a new topic
+* Finally, `server.py` defines a server using `tornado` web framework, uses the `KafkaConsumer` class (defined in `consumer.py`) to consume data from the topics of above and display results to the web UI.
+
+_Below is the project guidelines and instructions:_
+
 # Project: Public Transit Status with Apache Kafka
 
 In this project, you will construct a streaming event pipeline around Apache Kafka and its ecosystem. Using public data from the [Chicago Transit Authority](https://www.transitchicago.com/data/) we will construct an event pipeline around Kafka that allows us to simulate and display the status of train lines in real-time.
