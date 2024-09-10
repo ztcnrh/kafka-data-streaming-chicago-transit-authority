@@ -77,8 +77,8 @@ async def process_station(stations):
             line=line_color
         )
 
-        # Send the transformed record to the output topic
-        await transformed_station_topic.send(value=transformed_station)
+        # Store the transformed station in the table
+        table[station.station_id] = transformed_station
 
 
 if __name__ == "__main__":

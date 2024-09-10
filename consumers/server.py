@@ -78,7 +78,7 @@ def run_server():
             is_avro=False,
         ),
         KafkaConsumer(
-            "cta.arrival_events",
+            "^cta.arrival_events",
             lines.process_message,
             offset_earliest=True,
         ),
